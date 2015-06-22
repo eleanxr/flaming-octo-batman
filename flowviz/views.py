@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+from waterkit import rasterflow
+
+def index(request):
+    return render(request, 'flowviz/index.django.html')
