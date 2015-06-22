@@ -9,6 +9,8 @@ from waterkit import rasterflow
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from pylab import figure
+import matplotlib.cm as cm
+import matplotlib.pyplot as plt
 
 def index(request):
     return render(request, 'flowviz/index.django.html')
@@ -28,9 +30,21 @@ def dynamic_raster(request, target_id, attribute):
         flow_target.location.identifier,
         "1950-01-01", "2014-12-31",
         target_data)
+    
+    plt.style.use('ggplot')
     fig = Figure()
     ax = fig.add_subplot(111)
-    rasterflow.raster_plot(data, attribute, "Flow Gap Plot", ax=ax)
+    base_colormap = cm.get_cmap('bwr_r')
+    min_value = data[attribute].min()
+    max_value = data[attribute].max()
+    # If the data has negative values, only show their relative sizes
+    if min_value < 0:
+        max_value = -min_value
+    colormap = rasterflow.create_colormap(data, attribute, base_colormap, vmin=min_value, vmax=max_value)
+    colormap.set_bad('black')
+    rasterflow.raster_plot(data, attribute, "Instream flow gap", show_colorbar=True,
+                           colormap=colormap, vmin=min_value, vmax=max_value, fig=fig, ax=ax)
+    
     canvas = FigureCanvas(fig)
     response = HttpResponse(content_type='image/png')
     canvas.print_png(response)
