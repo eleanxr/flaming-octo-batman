@@ -5,5 +5,14 @@ from models import GageLocation, Watershed, GradedFlowTarget, GradedFlowTargetEl
 
 admin.site.register(GageLocation)
 admin.site.register(Watershed)
-admin.site.register(GradedFlowTarget)
 admin.site.register(GradedFlowTargetElement)
+
+class GradedFlowTargetElementInline(admin.StackedInline):
+    model = GradedFlowTargetElement
+    extra = 3
+
+class GradedFlowTargetAdmin(admin.ModelAdmin):
+    fields = ['location', 'name']
+    inlines = [GradedFlowTargetElementInline]
+    
+admin.site.register(GradedFlowTarget, GradedFlowTargetAdmin)

@@ -1,1 +1,7 @@
-Flow visualization index page.
+<h1>Instream Flow Visualization</h1>
+
+<ul>
+    {% for right in flow_targets %}
+        <li><a href='/flowviz/{{ right.id }}'>{{ right.name }} ({{ right.location }})</a></li>
+    {% endfor %}
+</ul>

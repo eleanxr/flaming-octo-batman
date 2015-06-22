@@ -10,9 +10,10 @@ class Watershed(models.Model):
 class GageLocation(models.Model):
     watershed = models.ForeignKey(Watershed)
     identifier = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
     
     def __unicode__(self):
-        return self.identifier
+        return "%s: %s" % (self.identifier, self.description)
     
 class GradedFlowTarget(models.Model):
     location = models.ForeignKey(GageLocation)
