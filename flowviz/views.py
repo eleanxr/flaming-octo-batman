@@ -68,7 +68,7 @@ def __read_data(target_id):
     for element in flow_target.gradedflowtargetelement_set.all():
         fr = "%d-%d" % (element.from_month, element.from_day)
         to = "%d-%d" % (element.to_month, element.to_day)
-        target_data.add((fr, to), element.target_value)
+        target_data.add((fr, to), float(element.target_value))
     data = rasterflow.read_data(
         flow_target.location.identifier,
         "1950-01-01", "2014-12-31",
@@ -104,4 +104,15 @@ def deficit_days_plot(request, target_id):
     fig, ax = __new_figure()
     join[join['pct'] > 0.0]['pct'].plot(kind = 'bar', ax=ax)
     return __plot_to_response(fig)
+
+def right_plot(request, target_id):
+    data = __read_data(target_id)
+    averages = data.groupby('dayofyear').mean()
+    plt.style.use('ggplot')
+    fig, ax = __new_figure()
+    plotdata = averages[['flow', 'e-flow-target']]
+    plotdata.columns = ['Average Daily Flow (cfs)', 'Water Right (cfs)']
+    plotdata.plot(ax=ax)
+    return __plot_to_response(fig)
+
     

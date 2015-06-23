@@ -1,3 +1,6 @@
+{% extends "flowviz/base.django.html" %}
+
+{% block content %}
 <h1>Flow target for {{ flow_target.name }}</h1>
 
 <div>
@@ -11,7 +14,10 @@
         {% endfor %}
     </ul>
     <div>
-        <a href="/admin/flowviz/gradedflowtarget/{{ flow_target.id }}">Edit water right...</a>
+        <img src="/flowviz/{{ flow_target.id }}/average"></img>
+    </div>
+    <div>
+        <a class='buttonlink' href="/admin/flowviz/gradedflowtarget/{{ flow_target.id }}">Edit water right...</a>
     </div>
 </div>
 
@@ -28,3 +34,4 @@
     </div>
 </div>
 
+{% endblock %}
