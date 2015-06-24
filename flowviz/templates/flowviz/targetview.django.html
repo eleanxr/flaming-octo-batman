@@ -1,10 +1,9 @@
 {% extends "flowviz/base.django.html" %}
 
 {% block content %}
-<h1>Flow target for {{ flow_target.name }}</h1>
+<h2>{{ flow_target.name }}</h2>
 
 <div>
-    <h2>Instream Flow Right</h2>
     <ul>
         {% for element in flow_target.gradedflowtargetelement_set.all %}
             <li>

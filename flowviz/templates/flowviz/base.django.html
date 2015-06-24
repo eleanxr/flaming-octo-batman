@@ -5,12 +5,15 @@
         <title>{% block title %}Flow Target Visualization{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'flowviz/jquery-ui-1.11.4.custom/jquery-ui.min.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static 'flowviz/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'flowviz/main.css' %}" />
         <script src={% static 'flowviz/jquery-1.11.3.min.js' %}></script>
         <script src={% static 'flowviz/jquery-ui-1.11.4.custom/jquery-ui.min.js' %}></script>
         <script src={% static 'flowviz/base.js' %}></script>
     </head>
     <body class='ui-widget'>
-        <div><h1><a href="/flowviz">SNAP Water Transactions Indicator Dashboard</a></h1></div>
+        <div class='header'>
+            <a href='/flowviz'>SNAP Water Transactions Dashboard</a>
+        </div>
         <div class='ui-widget'>
             {% block content %}
             {% endblock %}

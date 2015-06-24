@@ -89,6 +89,7 @@ def deficit_stats_plot(request, target_id):
     plt.style.use('ggplot')
     fig, ax = __new_figure()
     deficit.boxplot(by='month', column='e-flow-gap', ax=ax)
+    ax.set_title('Deficit Statistics')
     return __plot_to_response(fig)
 
 def deficit_days_plot(request, target_id):
@@ -103,6 +104,7 @@ def deficit_days_plot(request, target_id):
     plt.style.use('ggplot')
     fig, ax = __new_figure()
     join[join['pct'] > 0.0]['pct'].plot(kind = 'bar', ax=ax)
+    ax.set_title('Percent of days in deficit')
     return __plot_to_response(fig)
 
 def right_plot(request, target_id):
@@ -113,6 +115,8 @@ def right_plot(request, target_id):
     plotdata = averages[['flow', 'e-flow-target']]
     plotdata.columns = ['Average Daily Flow (cfs)', 'Water Right (cfs)']
     plotdata.plot(ax=ax)
+    ax.set_xlabel("Month")
+    rasterflow.label_months(ax)
     return __plot_to_response(fig)
 
     

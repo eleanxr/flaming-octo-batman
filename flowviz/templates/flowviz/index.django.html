@@ -1,7 +1,7 @@
 {% extends "flowviz/base.django.html" %}
 
 {% block content %}
-<h2 class='ui-widget-header'>Environmental Flow</h2>
+<div class='ui-widget-header'>Environmental Flow</div>
 
 <ul class='ui-widget'>
     {% for right in flow_targets %}
@@ -9,7 +9,7 @@
     {% endfor %}
 </ul>
 
-<h2 class='ui-widget-header'>Agriculture and Economics</h2>
-<h2 class='ui-widget-header'>Municipal and Industrial</h2>
-<h2 class='ui-widget-header'>System Supply Security</h2>
+<div class='ui-widget-header'>Agriculture and Economics</div>
+<div class='ui-widget-header'>Municipal and Industrial</div>
+<div class='ui-widget-header'>System Supply Security</div>
 {% endblock %}
